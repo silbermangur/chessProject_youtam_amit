@@ -18,7 +18,7 @@ std::string Manager::toString() const
 		{
 			if (board[i][j])
 			{
-				string += board[i][j]->toString();
+				string += board[i][j]->toChar();
 				string += " ";
 			}
 			else
