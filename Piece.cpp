@@ -22,7 +22,7 @@ input:
 	string type: the type of the piece
 output:
 */
-Piece::Piece(Position pos, char col, string type) : _pos(pos), _color(col), _type(type) // constructor of piece
+Piece::Piece(Position pos, char col, char type) : _pos(pos), _color(col), _type(type) // constructor of piece
 {
 	checkColor(col);	
 }
@@ -46,4 +46,39 @@ output: String of the position
 string Piece::getPos() // gets the position as a string with _pos toString method
 {
 	return _pos.toString();
+}
+
+/*
+desc: gets the piece as a char representing type and color
+input: None
+output: piece as char
+*/
+char Piece::toChar()
+{
+
+	if (_color == 'b')
+	{
+		return _type - 32;
+	}
+	return _type;
+}
+
+/*
+desc: gets the color of the piece
+input: none
+output: the color of the piece char
+*/
+char Piece::getColor()
+{
+	return _color;
+}
+
+/*
+desc: gets the type of the piece
+input: None
+output: the type of the piece char
+*/
+char Piece::getType()
+{
+	return _type;
 }

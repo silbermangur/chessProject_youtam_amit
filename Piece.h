@@ -8,14 +8,15 @@ class Piece
 private:
 	Position _pos;
 	char _color; // ONLY 'b' or 'w' other chars will result in an exception
-	string _type;
+	char _type;
 public:
-
-	Piece(Position pos, char col, string type);
+	Piece(Position pos, char col, char type);
 	Piece(Piece&);
 	
+	char toChar();
 	string getPos();
 	char getColor();
+	char getType();
 	
 	void setPos(string pos);
 	int virtual move(Position pos) = 0;
