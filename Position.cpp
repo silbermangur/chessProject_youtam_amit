@@ -1,6 +1,6 @@
 #include "Position.h"
 
-#define MAX_NUM 10
+#define MAX_NUM 8
 #define MIN_NUM 0
 
 #define MAX_LET 'h'
@@ -112,4 +112,17 @@ string Position::toString()
 	st += ",";
 	st += std::to_string(_num);
 	return st;
+}
+
+/*
+desc: converts the position of the piece to number representing it in an array
+input: None
+output: the number that will access the position in an 8 by 8 array
+*/
+int Position::turnToNum() const
+{
+	int number = 0;
+	number = (this->_num-1) * MAX_NUM;
+	number += this->_let - 'a';
+	return number;
 }

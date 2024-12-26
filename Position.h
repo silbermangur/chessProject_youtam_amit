@@ -11,14 +11,13 @@ class Position
 private:
 	int _num; // number that represent the y position
 	char _let; // letter that represents the x 
-protected:
-	void setPos(string pos);
 public:
 	Position(char let, int num);
 	Position(Position& pos);
 	Position& operator=(const Position& other);
 	bool operator==(const Position& other);
-
+	int turnToNum() const;
+	void setPos(string pos);
 	string toString();
 };
 
@@ -31,5 +30,6 @@ class PositionException : public exception
 		return "invalid Position!";
 	}
 };
+
 
 #endif // POSITION_H

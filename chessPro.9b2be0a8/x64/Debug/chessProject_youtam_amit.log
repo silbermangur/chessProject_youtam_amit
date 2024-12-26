@@ -1,0 +1,39 @@
+﻿  Manager.cpp
+C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(21,28): error C2039: 'toString': is not a member of 'Piece'
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(6,7):
+      see declaration of 'Piece'
+  
+C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,39): error C2259: 'Piece': cannot instantiate abstract class
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(6,7):
+      see declaration of 'Piece'
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,39):
+      due to following members:
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,39):
+      'int Piece::move(Position)': is abstract
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(21,14):
+      see declaration of 'Piece::move'
+  
+C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,44): error C2259: 'Piece': cannot instantiate abstract class
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(6,7):
+      see declaration of 'Piece'
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,44):
+      due to following members:
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,44):
+      'int Piece::move(Position)': is abstract
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(21,14):
+      see declaration of 'Piece::move'
+  
+C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(36,44): error C2558: class 'Piece': no copy constructor available or copy constructor is declared 'explicit'
+C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(45,16): error C2259: 'Piece': cannot instantiate abstract class
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(6,7):
+      see declaration of 'Piece'
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(45,16):
+      due to following members:
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Manager.cpp(45,16):
+      'int Piece::move(Position)': is abstract
+      C:\Users\Cyber_User\Desktop\homework GUR 3\chessProject_youtam_amit\Piece.h(21,14):
+      see declaration of 'Piece::move'
+  
+  Piece.cpp
+  Position.cpp
+  Generating Code...
