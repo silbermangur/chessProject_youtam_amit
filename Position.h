@@ -1,7 +1,10 @@
-#pragma once
+#ifndef POSITION_H
+#define POSITION_H
+
 #include <iostream>
 #include <sstream> // to convert numbers to strings
 using namespace std;
+
 
 class Position
 {
@@ -12,6 +15,10 @@ protected:
 	void setPos(string pos);
 public:
 	Position(char let, int num);
+	Position(Position& pos);
+	Position& operator=(const Position& other);
+	bool operator==(const Position& other);
+
 	string toString();
 };
 
@@ -24,3 +31,5 @@ class PositionException : public exception
 		return "invalid Position!";
 	}
 };
+
+#endif // POSITION_H
