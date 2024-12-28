@@ -43,9 +43,19 @@ desc: gets the position of the piece as a string "LET,NUM"
 input: None
 output: String of the position
 */
-string Piece::getPos() // gets the position as a string with _pos toString method
+string Piece::getStringPos() const // gets the position as a string with _pos toString method
 {
 	return _pos.toString();
+}
+
+/*
+desc: returns the position of the piece
+input: none
+output: the position
+*/
+Position Piece::getPos() const
+{
+	return _pos;
 }
 
 /*
@@ -68,7 +78,7 @@ desc: gets the color of the piece
 input: none
 output: the color of the piece char
 */
-char Piece::getColor()
+char Piece::getColor() const
 {
 	return _color;
 }
@@ -78,7 +88,7 @@ desc: gets the type of the piece
 input: None
 output: the type of the piece char
 */
-char Piece::getType()
+char Piece::getType() const
 {
 	return _type;
 }

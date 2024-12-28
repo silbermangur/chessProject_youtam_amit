@@ -13,12 +13,15 @@ private:
 	char _let; // letter that represents the x 
 public:
 	Position(char let, int num);
-	Position(Position& pos);
+	Position(const Position& pos);
 	Position& operator=(const Position& other);
-	bool operator==(const Position& other);
+	bool operator==(const Position& other) const;
 	int turnToNum() const;
 	void setPos(string pos);
-	string toString();
+	string toString() const;
+	bool checkBounds() const;
+	char getLet() const;
+	int getNum() const;
 };
 
 

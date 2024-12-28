@@ -7,22 +7,21 @@
 #define MIN_LET 'a'
 
 /*
-desc: function to throw exception if position is not within bounds
-input:
-	int num: pos on y
-	char let: pos on x
-output: None
+desc: function to check if position is not within bounds
+input: none
+output: true if withing bounds, false if not
 */
-void CheckBounds(int let, char num)
+bool Position::checkBounds() const
 {
-	if (let < MIN_LET || let > MAX_LET) // check if position out of bounds
+	if (_let < MIN_LET || _let > MAX_LET) // check if position out of bounds
 	{
-		throw PositionException();
+		return false;
 	}
-	if (num < MIN_NUM || num > MAX_NUM) // check if position out of bounds
+	if (_num < MIN_NUM || _num > MAX_NUM) // check if position out of bounds
 	{
-		throw PositionException();
+		return false;
 	}
+	return true;
 }
 
 /*
@@ -34,8 +33,6 @@ output: None
 */
 Position::Position(char let, int num)
 {
-	CheckBounds(let, num);
-
 	_let = let;
 	_num = num;
 }
@@ -45,7 +42,7 @@ desc: copy constructor for the position class copys the fields from pos to this
 input: Position& pos: position to copy from
 output: None
 */
-Position::Position(Position& pos)
+Position::Position(const Position& pos)
 {
 	_let = pos._let;
 	_num = pos._num;
@@ -68,7 +65,7 @@ desc: operator == of the Position class that compares two Positions
 input: Position& other: the point to compare
 output: 
 */
-bool Position::operator==(const Position& other)
+bool Position::operator==(const Position& other) const
 {
 	if (_let == other._let && _num == other._num)
 	{
@@ -85,8 +82,7 @@ output: None
 void Position::setPos(string pos)
 {
 	int num = stoi(pos.substr(2)); // changes string to number and puts it in a variable
-	char let = pos[0];
-	CheckBounds(let, num); // check if position within bounds
+	char let = pos[0];; 
 	
 	
 	if (pos[1] != ',') // check for proper formating
@@ -105,7 +101,7 @@ desc: converts the position of the piece to a string
 input: None
 output: string of the position formatted like "LETTER,NUMBER", for example "c,4"
 */
-string Position::toString()
+string Position::toString() const
 {
 	string st = "";
 	st += _let;
@@ -125,4 +121,25 @@ int Position::turnToNum() const
 	number = (this->_num-1) * MAX_NUM;
 	number += this->_let - 'a';
 	return number;
+}
+
+/*
+desc: return the letter coord of the position
+input: None
+output: the letter
+*/
+char Position::getLet() const
+{
+	return this->_let;
+}
+
+/*
+desc: return the number coord of the position
+input: None
+output: the number
+*/
+
+int Position::getNum() const
+{
+	return this->_num;
 }

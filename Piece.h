@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Position.h"
+#include "Manager.h"
 
 
 class Piece
@@ -11,15 +12,16 @@ private:
 	char _type;
 public:
 	Piece(Position pos, char col, char type);
-	Piece(Piece&);
+	Piece(Piece& piece);
 	
 	char toChar();
-	string getPos();
-	char getColor();
-	char getType();
+	string getStringPos() const;
+	Position getPos() const;
+	char getColor() const;
+	char getType() const;
 	
 	void setPos(string pos);
-	int virtual move(Position pos) = 0;
+	int virtual move(Position pos, Manager board) = 0;
 };
 
 // exception class for if the pieces color is invalid

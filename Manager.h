@@ -3,9 +3,8 @@
 
 class Manager
 {
-private:
-	Piece* board[8][8];
 public:
+	Piece* board[8][8];
 	Manager();
 	string toString() const;
 	bool addPiece(Piece& piece, Position position);
