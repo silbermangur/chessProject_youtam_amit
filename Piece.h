@@ -3,6 +3,7 @@
 #include "Position.h"
 #include "Manager.h"
 
+class Manager;
 
 class Piece
 {
@@ -21,6 +22,7 @@ public:
 	char getType() const;
 	
 	void setPos(string pos);
+	int virtual checkMove(Position pos, Manager board) = 0;
 	int virtual move(Position pos, Manager board) = 0;
 };
 
