@@ -13,4 +13,5 @@ public:
 	void removePiece(Position position);
 	char checkForPiece(Position position);
 	int movePiece(Position src, Position dst);
+	bool isSquareSafe(Position square, char col);
 };

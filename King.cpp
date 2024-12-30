@@ -40,6 +40,10 @@ int King::checkMove(Position move, Manager board)
 	{
 		return VALID_MOVE;
 	}
+	if (board.isSquareSafe(move, this->getColor())) // function to check if the square if safe
+	{
+		return MOVE_MAKES_CHECK;
+	}
 	return ILLEGAL_MOVE;
 }
 

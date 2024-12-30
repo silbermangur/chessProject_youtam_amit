@@ -51,3 +51,28 @@ int Manager::movePiece(Position src, Position dst)
 {
 
 }
+
+/*
+desc: function to determine if a square is safe or not (if a piece of the opposite color can move there)
+input: 
+	Position square: the square to check for whether it is safe or not
+	char col: the player's color (checks for opposite color)
+output: bool of whether the square is safe or not
+*/
+bool Manager::isSquareSafe(Position square, char col)
+{
+	for (int i = 0; i < BOARD_SIZE; i++)
+	{
+		for (int j = 0; j < BOARD_SIZE; j++) // loop for the whole board
+		{
+			if (board[i][j] != nullptr && board[i][j]->getColor() != col) // if for if the square is occupied by a piece of the opposite color
+			{
+				if (board[i][j]->checkMove(square, *this) == 0) // if it can move to the square it will return false
+				{
+					return false;
+				}
+			}
+		}
+	}
+	return true; // if there isnt a piece that can move there return true
+}
