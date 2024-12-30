@@ -7,13 +7,13 @@ class Manager;
 
 class Piece
 {
-private:
+protected:
 	Position _pos;
 	char _color; // ONLY 'b' or 'w' other chars will result in an exception
 	char _type;
 public:
 	Piece(Position pos, char col, char type);
-	Piece(Piece& piece);
+	Piece();
 	
 	char toChar();
 	string getStringPos() const;
@@ -22,7 +22,7 @@ public:
 	char getType() const;
 	
 	void setPos(string pos);
-	int virtual checkMove(Position pos, Manager board) const= 0;
+	int virtual checkMove(Position pos, const Manager& board) const= 0;
 	int virtual move(Position pos, Manager board) = 0;
 };
 

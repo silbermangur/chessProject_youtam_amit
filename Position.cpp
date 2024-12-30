@@ -40,12 +40,29 @@ Position::Position(char let, int num)
 /*
 desc: copy constructor for the position class copys the fields from pos to this
 input: Position& pos: position to copy from
-output: None
+output: none
 */
 Position::Position(const Position& pos)
 {
 	_let = pos._let;
 	_num = pos._num;
+}
+
+/*
+desc: ctor that creates a position out of an index in the array
+input: the index
+output: none
+*/
+Position::Position(int index)
+{
+	this->_let = index % MAX_NUM + 'a';
+	this->_num = index / MAX_NUM + 1;
+}
+
+Position::Position()
+{
+	this->_let = 'a';
+	this->_num = '1';
 }
 
 /*

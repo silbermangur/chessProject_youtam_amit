@@ -27,6 +27,13 @@ Piece::Piece(Position pos, char col, char type) : _pos(pos), _color(col), _type(
 	checkColor(col);	
 }
 
+Piece::Piece()
+{
+	this->_color = 'w';
+	this->_pos = Position(0);
+	this->_type = 'P';
+}
+
 /*
 desc: sets the position of the piece with a string "LET,NUM"
 input: string pos: the string to set the position with

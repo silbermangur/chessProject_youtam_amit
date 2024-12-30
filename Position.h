@@ -14,6 +14,8 @@ private:
 public:
 	Position(char let, int num);
 	Position(const Position& pos);
+	Position(int index);
+	Position();
 	Position& operator=(const Position& other);
 	bool operator==(const Position& other) const;
 	int turnToNum() const;

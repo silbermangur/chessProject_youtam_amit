@@ -16,7 +16,8 @@ public:
 	void removePiece(Position position);
 	char checkForPiece(Position position) const;
 	int movePiece(Position src, Position dst);
-	bool isSquareSafe(Position square, char col);
+	bool isSquareSafe(Position square, char col) const;
 	void changeTurn();
+	char oppColor() const;
 	Position findOppKing() const;
 };

@@ -1,4 +1,6 @@
 #include "Manager.h"
+#include "Rook.h"
+#include "King.h"
 #include <iostream>
 #define BOARD_SIZE 8
 #define ILLEGAL_INDEX 5
@@ -10,7 +12,18 @@
 
 Manager::Manager()
 {
+	int i = 0;
 	this->turn = 'w';
+	for (i = 0; i < BOARD_SIZE * BOARD_SIZE; i++)
+	{
+		board[0][i] = nullptr;
+	}
+	board[0][0] = new Rook('w', Position('a', 1));
+	board[0][7] = new Rook('w', Position('h', 1));
+	board[7][0] = new Rook('b', Position('a', 8));
+	board[7][7] = new Rook('b', Position('h', 8));
+	board[0][3] = new King('w', Position('d', 1));
+	board[7][3] = new King('b', Position('d', 8));
 }
 
 std::string Manager::toString() const
@@ -22,7 +35,7 @@ std::string Manager::toString() const
 	{
 		for (j = 0; j < BOARD_SIZE; j++)
 		{
-			if (board[i][j])
+			if (board[i][j] != nullptr)
 			{
 				string += board[i][j]->toChar();
 				string += " ";
@@ -30,9 +43,10 @@ std::string Manager::toString() const
 			else
 			{
 				string += '#';
-				string += "  ";
+				string += " ";
 			}
 		}
+		string += '\n';
 	}
 	return string;
 }
@@ -79,20 +93,21 @@ int Manager::movePiece(Position src, Position dst)
 		//moving the piece on the board, making sure to delete the piece in the dst if there is one
 		if (board[0][dst.turnToNum()] != nullptr)
 		{
-			delete board[0][dst.turnToNum()];
+			removePiece(dst);
 		}
 		//moving the pointer to the dst and removing it from the src
 		board[0][dst.turnToNum()] = board[0][src.turnToNum()];
 		board[0][src.turnToNum()] = nullptr;
-		//changing the turn for a second just to see if the move cause a check
-		changeTurn();
-		if (this->isSquareSafe(this->findOppKing(), turn))
+		//checking if the move checked te opponet
+		if (this->isSquareSafe(this->findOppKing(), this->oppColor())==false)
 		{
-			//changing the turn back
+			//changing the turn
 			changeTurn();
 			return CHECK_OPP;
 		}
+		//changing the turn
 		changeTurn();
+		return VALID_MOVE;
 	}
 }
 
@@ -103,7 +118,7 @@ input:
 	char col: the player's color (checks for opposite color)
 output: bool of whether the square is safe or not
 */
-bool Manager::isSquareSafe(Position square, char col)
+bool Manager::isSquareSafe(Position square, char col) const
 {
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -139,27 +154,38 @@ void Manager::changeTurn()
 }
 
 /*
+desc: gives the color of the player whose not in turn
+input: none
+output: the color of the opponent
+*/
+char Manager::oppColor() const
+{
+	if (turn == 'w')
+	{
+		return 'b';
+	}
+	else
+	{
+		return 'w';
+	}
+}
+
+/*
 desc: finds the king of the opponent(the player whose not current turn)
 input: none
 output: the position
 */
 Position Manager::findOppKing() const
 {
-	char typeToLookFor = 'k';
 	int i = 0;
-	//getting the type of the king
-	if (this->turn == 'w')
-	{
-		typeToLookFor = 'K';
-	}
-	//searching for it in the board
+	//searching for the king in the board
 	for (i = 0; i < BOARD_SIZE * BOARD_SIZE; i++)
 	{
-		if (board[0][i]->getType() == typeToLookFor)
+		if (board[0][i] != nullptr && board[0][i]->getType() == 'k' && board[0][i]->getColor() == oppColor())
 		{
 			break;
 		}
 	}
 	//turning the i from index to position
-	return Position(i % BOARD_SIZE + 'a', i / BOARD_SIZE + 1);
+	return Position(i);
 }

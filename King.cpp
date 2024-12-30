@@ -5,6 +5,13 @@
 #define VALID_MOVE 0
 #define MOVE_MAKES_CHECK 4
 
+King::King(char col, Position pos)
+{
+	this->setPos(pos.toString());
+	this->_color = col;
+	this->_type = 'k';
+}
+
 /*
 desc: function returns true or false if the move is an illegal move
 input: 
@@ -14,29 +21,28 @@ output: bool of if the move is valid or not
 */
 bool validMove(Position pos, Position move)
 {
-	if (std::abs(pos.getNum() - move.getNum() > 2))
+	if (std::abs(pos.getNum() - move.getNum()) > 2)
 	{
 		return false;
 	}
-	if (std::abs(pos.getLet() - move.getLet() > 2))
+	if (std::abs(pos.getLet() - move.getLet()) > 2)
 	{
 		return false;
 	}
 	return true;
 }
 
-int King::checkMove(Position move, Manager board) const
+int King::checkMove(Position dst, const Manager& board) const
 {
-	Position pos = this->getPos(); 
-	if (validMove(pos, move))
+	if (!validMove(this->getPos(), dst))
 	{
-		return VALID_MOVE;
+		return ILLEGAL_MOVE;
 	}
-	if (board.isSquareSafe(move, this->getColor())) // function to check if the square if safe
+	if (board.isSquareSafe(dst, this->getColor())) // function to check if the square if safe
 	{
 		return MOVE_MAKES_CHECK;
 	}
-	return ILLEGAL_MOVE;
+	return VALID_MOVE;
 }
 
 int King::move(Position pos, Manager board)

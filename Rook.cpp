@@ -4,6 +4,12 @@
 #define EQU_SRC_AND_DST 7
 #define VALID_MOVE 0
 
+Rook::Rook(char col, Position pos) 
+{
+	this->setPos(pos.toString());
+	this->_color = col;
+	this->_type = 'r';
+}
 /*
 desc: checks if the path between the current position and the dst position is clear
 intput: the dst position, the manager consisting of the board
@@ -68,7 +74,7 @@ desc: checks if the move is legal, and moves the piece if it is
 input: the dst position, the manager 
 output: the code (as in the slideshow)
 */
-int Rook::checkMove(Position dst, Manager board) const
+int Rook::checkMove(Position dst, const Manager& board) const
 {
 	//checking if the rook and the dst position dont have neither letter coord and num coord in common
 	if (this->getPos().getLet() != dst.getLet() && this->getPos().getNum() != dst.getNum())
