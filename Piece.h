@@ -22,7 +22,7 @@ public:
 	char getType() const;
 	
 	void setPos(string pos);
-	int virtual checkMove(Position pos, Manager board) = 0;
+	int virtual checkMove(Position pos, Manager board) const= 0;
 	int virtual move(Position pos, Manager board) = 0;
 };
 

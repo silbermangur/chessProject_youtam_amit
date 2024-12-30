@@ -2,6 +2,7 @@
 #define ILLEGAL_INDEX 5
 #define ILLEGAL_MOVE 6
 #define EQU_SRC_AND_DST 7
+#define VALID_MOVE 0
 
 /*
 desc: checks if the path between the current position and the dst position is clear
@@ -67,28 +68,32 @@ desc: checks if the move is legal, and moves the piece if it is
 input: the dst position, the manager 
 output: the code (as in the slideshow)
 */
-int Rook::move(Position dst, Manager board)
+int Rook::checkMove(Position dst, Manager board) const
 {
-	if (!dst.checkBounds())
-	{
-		//returning code 5 if the dst position is out of bounds
-		return ILLEGAL_INDEX;
-	}
 	//checking if the rook and the dst position dont have neither letter coord and num coord in common
 	if (this->getPos().getLet() != dst.getLet() && this->getPos().getNum() != dst.getNum())
 	{
 		//returning code 6 in that case
 		return ILLEGAL_MOVE;
 	}
-	//checking if the dst and src positions are equal
-	if (this->getPos() == dst)
-	{
-		//returning code 7 in that case
-		return EQU_SRC_AND_DST;
-	}
 	//checking if the path to the dst is clear
 	if (!this->checkPath(dst, board))
 	{
 		return ILLEGAL_MOVE;
 	}
+	return VALID_MOVE;
+}
+ /*
+ desc: checks if move is valid then moves the rook if it is
+ input: the position to move to, the manager
+ output: the code(from the sideshow)
+ */
+int Rook::move(Position dst, Manager board)
+{
+	int moveCode = this->checkMove(dst, board);
+	if (moveCode == VALID_MOVE)
+	{
+		this->setPos(dst.toString());
+	}
+	return moveCode;
 }

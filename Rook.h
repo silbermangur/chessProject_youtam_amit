@@ -6,4 +6,5 @@ class Rook :public Piece
 {
 	int virtual move(Position dst, Manager board) override;
 	bool checkPath(Position dst, const Manager board) const;
+	int checkMove(Position dst, Manager board) const override;
 };

@@ -7,6 +7,6 @@ class King : public Piece
 private:
 	bool isChecked;
 public:
-	int virtual checkMove(Position pos, Manager board);
-	int virtual move(Position pos, Manager board);
+	int virtual checkMove(Position pos, Manager board) const override;
+	int virtual move(Position pos, Manager board) override;
 };

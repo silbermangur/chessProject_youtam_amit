@@ -25,17 +25,9 @@ bool validMove(Position pos, Position move)
 	return true;
 }
 
-int King::checkMove(Position move, Manager board)
+int King::checkMove(Position move, Manager board) const
 {
 	Position pos = this->getPos(); 
-	if (pos == move)
-	{
-		return EQU_SRC_AND_DST;
-	}
-	if (!(move.checkBounds()))
-	{
-		return ILLEGAL_INDEX;
-	}
 	if (validMove(pos, move))
 	{
 		return VALID_MOVE;
@@ -50,13 +42,9 @@ int King::checkMove(Position move, Manager board)
 int King::move(Position pos, Manager board)
 {
 	int moveCode = this->checkMove(pos, board);
-	if (moveCode == 0)
+	if (moveCode == VALID_MOVE)
 	{
 		this->setPos(pos.toString());
-		return 0;
 	}
-	else
-	{
-		return moveCode;
-	}
+	return moveCode;
 }
