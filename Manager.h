@@ -13,7 +13,6 @@ public:
 	Manager();
 	string toString() const;
 	void addPiece(Piece& piece, Position position);
-	void removePiece(Position position);
 	char checkForPiece(Position position) const;
 	int movePiece(Position src, Position dst);
 	bool isSquareSafe(Position square, char col) const;

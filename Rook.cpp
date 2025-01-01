@@ -1,7 +1,5 @@
 #include "Rook.h"
-#define ILLEGAL_INDEX 5
 #define ILLEGAL_MOVE 6
-#define EQU_SRC_AND_DST 7
 #define VALID_MOVE 0
 
 Rook::Rook(char col, Position pos) 

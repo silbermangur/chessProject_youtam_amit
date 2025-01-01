@@ -1,7 +1,5 @@
 #include "King.h"
-#define ILLEGAL_INDEX 5
 #define ILLEGAL_MOVE 6
-#define EQU_SRC_AND_DST 7
 #define VALID_MOVE 0
 #define MOVE_MAKES_CHECK 4
 
@@ -37,10 +35,6 @@ int King::checkMove(Position dst, const Manager& board) const
 	if (!validMove(this->getPos(), dst))
 	{
 		return ILLEGAL_MOVE;
-	}
-	if (board.isSquareSafe(dst, this->getColor())) // function to check if the square if safe
-	{
-		return MOVE_MAKES_CHECK;
 	}
 	return VALID_MOVE;
 }

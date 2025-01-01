@@ -9,16 +9,23 @@ int main()
 	code = mana.movePiece(Position(0), Position(1));
 	std::cout << mana.toString() << std::endl;
 	std::cout << code << std::endl;
-	code = mana.movePiece(Position(0), Position(1));
+	code = mana.movePiece(Position('d', 8), Position('e', 8));
 	std::cout << mana.toString() << std::endl;
 	std::cout << code << std::endl;
-	code = mana.movePiece(Position(63), Position(62));
+	code = mana.movePiece(Position('b', 1), Position('b', 8));
 	std::cout << mana.toString() << std::endl;
 	std::cout << code << std::endl;
-	code = mana.movePiece(Position(1), Position('b', 8));
+	code = mana.movePiece(Position('e', 8), Position('d', 7));
 	std::cout << mana.toString() << std::endl;
 	std::cout << code << std::endl;
-	code = mana.movePiece(Position(62), Position('g', 1));
+	code = mana.movePiece(Position('b', 8), Position('a', 8));
 	std::cout << mana.toString() << std::endl;
 	std::cout << code << std::endl;
+	code = mana.movePiece(Position('h', 8), Position('h', 1));
+	std::cout << mana.toString() << std::endl;
+	std::cout << code << std::endl;
+	code = mana.movePiece(Position('a', 8), Position('d', 8));
+	std::cout << mana.toString() << std::endl;
+	std::cout << code << std::endl;
+
 }

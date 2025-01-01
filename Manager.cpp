@@ -7,6 +7,7 @@
 #define ILLEGAL_MOVE 6
 #define EQU_SRC_AND_DST 7
 #define INVALID_SOURCE 2
+#define MOVE_MAKES_CHECK 4
 #define VALID_MOVE 0
 #define CHECK_OPP 1
 
@@ -56,12 +57,6 @@ void Manager::addPiece(Piece& piece, Position position)
 	board[0][position.turnToNum()] = &piece;
 }
 
-void Manager::removePiece(Position position)
-{
-	delete board[0][position.turnToNum()];
-	board[0][position.turnToNum()] = NULL;
-}
-
 char Manager::checkForPiece(Position position) const
 {
 	return board[0][position.turnToNum()]->toChar();
@@ -69,6 +64,7 @@ char Manager::checkForPiece(Position position) const
 
 int Manager::movePiece(Position src, Position dst) 
 {
+	Piece* tempPiece = nullptr;
 	//making sure the src and dst positions are not the same
 	if (src == dst)
 	{
@@ -90,22 +86,41 @@ int Manager::movePiece(Position src, Position dst)
 	}
 	if (board[0][src.turnToNum()]->move(dst, *this) == VALID_MOVE)
 	{
-		//moving the piece on the board, making sure to delete the piece in the dst if there is one
+		//moving the piece on the board, making sure to save the piece in the dst if there is one, to later delete it
 		if (board[0][dst.turnToNum()] != nullptr)
 		{
-			removePiece(dst);
+			tempPiece = board[0][dst.turnToNum()];
 		}
 		//moving the pointer to the dst and removing it from the src
 		board[0][dst.turnToNum()] = board[0][src.turnToNum()];
 		board[0][src.turnToNum()] = nullptr;
-		//checking if the move checked te opponet
+		//checking if the move cause a check on the player
+		changeTurn();
+		if (!this->isSquareSafe(this->findOppKing(), this->oppColor()))
+		{
+			//if the move cause a check, reveting to turn back
+			changeTurn();
+			//reverting the changes made to the board
+			board[0][src.turnToNum()] = board[0][dst.turnToNum()];
+			board[0][dst.turnToNum()] = tempPiece;
+			tempPiece = nullptr;
+			//reverting the piece's position
+			board[0][src.turnToNum()]->setPos(src.toString());
+			return MOVE_MAKES_CHECK;
+		}
+		else if (tempPiece != nullptr)
+		{
+			//if the move didnt cause a check, deleting the memory of the captured piece
+			delete tempPiece;
+			tempPiece = nullptr;
+		}
+		//checking if the move checked the opponet
+		changeTurn();
 		if (this->isSquareSafe(this->findOppKing(), this->oppColor())==false)
 		{
-			//changing the turn
 			changeTurn();
 			return CHECK_OPP;
 		}
-		//changing the turn
 		changeTurn();
 		return VALID_MOVE;
 	}
