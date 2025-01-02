@@ -1,11 +1,14 @@
 #include "Manager.h"
 #include "Rook.h"
 #include "King.h"
+#include "Pawn.h"
+#include "Knight.h"
 #include <iostream>
 #define BOARD_SIZE 8
 #define ILLEGAL_INDEX 5
 #define ILLEGAL_MOVE 6
 #define EQU_SRC_AND_DST 7
+#define OWN_CAPTURE 3
 #define INVALID_SOURCE 2
 #define MOVE_MAKES_CHECK 4
 #define VALID_MOVE 0
@@ -23,8 +26,21 @@ Manager::Manager()
 	board[0][7] = new Rook('w', Position('h', 1));
 	board[7][0] = new Rook('b', Position('a', 8));
 	board[7][7] = new Rook('b', Position('h', 8));
+	board[0][1] = new Knight('w', Position('b', 1));
+	board[0][6] = new Knight('w', Position('g', 1));
+	board[7][1] = new Knight('b', Position('b', 8));
+	board[7][6] = new Knight('b', Position('g', 8));
 	board[0][3] = new King('w', Position('d', 1));
 	board[7][3] = new King('b', Position('d', 8));
+	//setting up the pawns
+	for (i = 0; i < BOARD_SIZE; i++)
+	{
+		board[1][i] = new Pawn('w', Position('a' + i, 2));
+	}
+	for (i = 0; i < BOARD_SIZE; i++)
+	{
+		board[6][i] = new Pawn('b', Position('a' + i, 7));
+	}
 }
 
 std::string Manager::toString() const
@@ -83,6 +99,11 @@ int Manager::movePiece(Position src, Position dst)
 	if (board[0][src.turnToNum()]->getColor() != this->turn)
 	{
 		return INVALID_SOURCE;
+	}
+	//making sure there isnt a piece of the player's color in the dst
+	if (board[0][dst.turnToNum()] != nullptr && board[0][dst.turnToNum()]->getColor() == this->turn)
+	{
+		return OWN_CAPTURE;
 	}
 	if (board[0][src.turnToNum()]->move(dst, *this) == VALID_MOVE)
 	{
