@@ -160,3 +160,10 @@ int Position::getNum() const
 {
 	return this->_num;
 }
+
+Position& Position::operator+=(const int* other)
+{
+	this->_let += other[0];
+	this->_num += other[1];
+	return *this;
+}

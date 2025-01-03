@@ -17,6 +17,7 @@ public:
 	Position(int index);
 	Position();
 	Position& operator=(const Position& other);
+	Position& operator+=(const int* other);
 	bool operator==(const Position& other) const;
 	int turnToNum() const;
 	void setPos(string pos);

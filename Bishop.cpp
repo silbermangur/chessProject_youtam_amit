@@ -25,6 +25,41 @@ int Bishop::checkMove(Position dst, const Manager& board) const
 
 bool Bishop::checkPath(Position dst, const Manager board) const
 {
+	int moves[][2] = { {-1, -1}, {-1, 1}, {1, 1}, {1, -1} }; // moves of the bishop
+	Position localPos = _pos;
+	int index = 0;
+
+	if (dst.getLet() - localPos.getLet() > 0) // checking what direction to the dst is and choosing the move accordingly
+	{
+		if (dst.getNum() - localPos.getNum() > 0) // up right
+		{
+			index = 2;
+		}
+		else // down right
+		{
+			index = 3;
+		}
+	}
+	else
+	{
+		if (dst.getNum() - localPos.getNum() > 0) // up left
+		{
+			index = 1;
+		}
+		else // down left
+		{
+			index = 0;
+		}
+	}
+
+	while ((localPos == dst) == false)
+	{
+		localPos += moves[index];
+		if (board.board[0][localPos.turnToNum()] != nullptr)
+		{
+			return false;
+		}
+	}
 	return true;
 }
 
