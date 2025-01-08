@@ -8,6 +8,14 @@ Rook::Rook(char col, Position pos)
 	this->_color = col;
 	this->_type = 'r';
 }
+
+Rook::Rook(char col, Position pos, char type)
+{
+	this->setPos(pos.toString());
+	this->_color = col;
+	this->_type = type;
+}
+
 /*
 desc: checks if the path between the current position and the dst position is clear
 intput: the dst position, the manager consisting of the board

@@ -5,9 +5,10 @@
 
 #define PieceType 'q'
 
-class Queen : public Piece , private Rook , private Bishop
+class Queen : public Rook , public Bishop
 {
-	Queen(char col, Position pos) : Piece(pos, col, PieceType), Rook(col, pos), Bishop(col, pos) {};
+public:
+	Queen(char col, Position pos) : Rook(col, pos, 'q'), Bishop(col, pos, 'q') {};
 	int virtual move(Position dst, Manager board) override;
 	int checkMove(Position dst, const Manager& board) const override;
 };

@@ -3,6 +3,7 @@
 #include "King.h"
 #include "Pawn.h"
 #include "Knight.h"
+#include "Queen.h"
 #include <iostream>
 #define BOARD_SIZE 8
 #define ILLEGAL_INDEX 5
@@ -32,6 +33,7 @@ Manager::Manager()
 	board[7][6] = new Knight('b', Position('g', 8));
 	board[0][3] = new King('w', Position('d', 1));
 	board[7][3] = new King('b', Position('d', 8));
+	board[0][4] = new Queen('w', Position('e', 1));
 	//setting up the pawns
 	for (i = 0; i < BOARD_SIZE; i++)
 	{

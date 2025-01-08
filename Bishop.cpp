@@ -9,6 +9,13 @@ Bishop::Bishop(char col, Position pos)
 	this->_type = 'b';
 }
 
+Bishop::Bishop(char col, Position pos, char type)
+{
+	this->setPos(pos.toString());
+	this->_color = col;
+	this->_type = type;
+}
+
 int Bishop::checkMove(Position dst, const Manager& board) const
 {
 	//this ifs contains a check if the move's src and dst positions are legal for a bishop then checks if the path is clear

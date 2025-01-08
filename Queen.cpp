@@ -5,12 +5,13 @@
 #define ILLEGAL_MOVE 6
 #define VALID_MOVE 0
 
+
 int Queen::move(Position dst, Manager board)
 {
     int moveCode = checkMove(dst, board);
     if (moveCode == 0 || moveCode == 8)
     {
-        Piece::_pos = dst;
+        _pos = dst;
     }
     return moveCode;
 }
