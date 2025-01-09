@@ -19,6 +19,7 @@ Manager::Manager()
 {
 	int i = 0;
 	this->turn = 'w';
+	this->totalMoves = 0;
 	for (i = 0; i < BOARD_SIZE * BOARD_SIZE; i++)
 	{
 		board[0][i] = nullptr;
@@ -27,6 +28,10 @@ Manager::Manager()
 	board[0][7] = new Rook('w', Position('h', 1));
 	board[7][0] = new Rook('b', Position('a', 8));
 	board[7][7] = new Rook('b', Position('h', 8));
+	board[0][2] = new Bishop('w', Position('c', 1));
+	board[0][5] = new Bishop('w', Position('f', 1));
+	board[7][2] = new Bishop('b', Position('c', 8));
+	board[7][5] = new Bishop('b', Position('f', 8));
 	board[0][1] = new Knight('w', Position('b', 1));
 	board[0][6] = new Knight('w', Position('g', 1));
 	board[7][1] = new Knight('b', Position('b', 8));
@@ -34,6 +39,7 @@ Manager::Manager()
 	board[0][3] = new King('w', Position('d', 1));
 	board[7][3] = new King('b', Position('d', 8));
 	board[0][4] = new Queen('w', Position('e', 1));
+	board[7][4] = new Queen('b', Position('e', 8));
 	//setting up the pawns
 	for (i = 0; i < BOARD_SIZE; i++)
 	{
@@ -57,15 +63,12 @@ std::string Manager::toString() const
 			if (board[i][j] != nullptr)
 			{
 				string += board[i][j]->toChar();
-				string += " ";
 			}
 			else
 			{
 				string += '#';
-				string += " ";
 			}
 		}
-		string += '\n';
 	}
 	return string;
 }
@@ -226,4 +229,21 @@ Position Manager::findOppKing() const
 	}
 	//turning the i from index to position
 	return Position(i);
+}
+
+/*
+desc: move method to proccess the message from the front end
+input: string msg ("a2a4")
+output: int the move code
+*/
+int Manager::movePieceStr(std::string msg)
+{
+	char let1 = msg[0];
+	int num1 = msg[1] - '0';
+
+	char let2 = msg[2];
+	int num2 = msg[3] - '0';
+
+	
+	return this->movePiece(Position(let1, num1), Position(let2, num2));
 }
