@@ -19,11 +19,11 @@ output: bool of if the move is valid or not
 */
 bool validMove(Position pos, Position move)
 {
-	if (std::abs(pos.getNum() - move.getNum()) > 2)
+	if (std::abs(pos.getNum() - move.getNum()) > 1)
 	{
 		return false;
 	}
-	if (std::abs(pos.getLet() - move.getLet()) > 2)
+	if (std::abs(pos.getLet() - move.getLet()) > 1)
 	{
 		return false;
 	}

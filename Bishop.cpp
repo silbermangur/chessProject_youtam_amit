@@ -59,13 +59,14 @@ bool Bishop::checkPath(Position dst, const Manager board) const
 		}
 	}
 
+	localPos += moves[index];
 	while ((localPos == dst) == false)
 	{
-		localPos += moves[index];
 		if (board.board[0][localPos.turnToNum()] != nullptr)
 		{
 			return false;
 		}
+		localPos += moves[index];
 	}
 	return true;
 }
