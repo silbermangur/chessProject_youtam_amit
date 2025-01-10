@@ -14,6 +14,7 @@ protected:
 public:
 	Piece(Position pos, char col, char type);
 	Piece();
+	virtual ~Piece();
 	
 	char toChar();
 	string getStringPos() const;

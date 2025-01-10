@@ -34,6 +34,11 @@ Piece::Piece()
 	this->_type = 'P';
 }
 
+Piece::~Piece()
+{
+
+}
+
 /*
 desc: sets the position of the piece with a string "LET,NUM"
 input: string pos: the string to set the position with
